@@ -1,0 +1,76 @@
+# Table of contents
+format: jb-book
+root: intro
+parts:
+  - caption: Foundation
+    chapters:
+    - file: chapters/01_introduction
+      title: Introduction to AI Agents
+    - file: chapters/02_evolution_of_agents
+      title: Evolution of AI Agents
+    - file: chapters/03_ecosystem_overview
+      title: The Agent Ecosystem Landscape
+
+  - caption: Protocols & Standards
+    chapters:
+    - file: chapters/04_mcp_protocol
+      title: Model Context Protocol (MCP)
+      sections:
+      - file: chapters/04a_mcp_servers
+        title: MCP Server Implementations
+      - file: chapters/04b_mcp_architecture
+        title: MCP Architecture Deep Dive
+    - file: chapters/05_a2a_protocol
+      title: Agent-to-Agent Protocol (A2A)
+      sections:
+      - file: chapters/05a_a2a_implementations
+        title: A2A Implementations
+      - file: chapters/05b_a2a_vs_mcp
+        title: A2A vs MCP Comparison
+
+  - caption: Current State Analysis
+    chapters:
+    - file: chapters/06_ecosystem_gaps
+      title: Ecosystem Gap Analysis
+    - file: chapters/07_security_challenges
+      title: Security & Trust Challenges
+    - file: chapters/08_developer_experience
+      title: Developer Experience Issues
+
+  - caption: Enterprise & Implementation
+    chapters:
+    - file: chapters/09_enterprise_adoption
+      title: Enterprise Adoption Patterns
+    - file: chapters/10_case_studies
+      title: Real-World Case Studies
+    - file: chapters/11_regional_variations
+      title: Regional Implementations
+
+  - caption: Future Directions
+    chapters:
+    - file: chapters/12_emerging_patterns
+      title: Emerging Patterns
+    - file: chapters/13_investment_opportunities
+      title: Investment Opportunities
+    - file: chapters/14_roadmap_2030
+      title: Roadmap to 2030
+
+  - caption: Practical Guide
+    chapters:
+    - file: chapters/15_building_agents
+      title: Building Your First Agent
+    - file: chapters/16_best_practices
+      title: Best Practices
+    - file: chapters/17_troubleshooting
+      title: Common Issues & Solutions
+
+  - caption: Resources
+    chapters:
+    - file: appendices/a_glossary
+      title: Glossary
+    - file: appendices/b_resources
+      title: Additional Resources
+    - file: appendices/c_code_examples
+      title: Code Examples
+    - file: references/bibliography
+      title: Bibliography

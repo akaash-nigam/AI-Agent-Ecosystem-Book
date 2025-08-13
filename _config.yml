@@ -1,0 +1,57 @@
+# Book settings
+title: "The AI Agent Ecosystem"
+author: Aakash Nigam
+copyright: "2025"
+logo: images/logo.png
+
+# Force re-execution of notebooks on each build (set to 'cache' for faster builds)
+execute:
+  execute_notebooks: auto
+  timeout: 300
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/akaash-nigam/AI-Agent-Ecosystem-Book
+  branch: main
+
+# Add GitHub buttons to the book
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  navbar_number_sections: true
+  home_page_in_navbar: false
+
+# Launch buttons
+launch_buttons:
+  notebook_interface: "classic"
+  binderhub_url: ""
+  colab_url: "https://colab.research.google.com"
+
+# Define the chapters
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+
+# Bibliography
+bibtex_bibfiles:
+  - references/references.bib
+  
+sphinx:
+  config:
+    language: en
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    html_extra_path: ['_static']
+    html_theme_options:
+      repository_url: "https://github.com/akaash-nigam/AI-Agent-Ecosystem-Book"
+      use_repository_button: true
+      use_issues_button: true
+      use_download_button: true
+      navbar_end: ["navbar-icon-links.html", "search-field.html"]
