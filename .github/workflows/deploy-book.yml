@@ -1,0 +1,98 @@
+name: Deploy Book to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Create missing directories and files
+      run: |
+        mkdir -p images _static data
+        # Create placeholder chapters
+        for dir in chapters appendices references; do
+          mkdir -p $dir
+        done
+        # Create any missing chapter files with placeholder content
+        python - << 'EOF'
+        import os
+        chapters = [
+            "chapters/02_evolution_of_agents.md",
+            "chapters/03_ecosystem_overview.md",
+            "chapters/04b_mcp_architecture.md",
+            "chapters/05a_a2a_implementations.md",
+            "chapters/05b_a2a_vs_mcp.md",
+            "chapters/07_security_challenges.md",
+            "chapters/08_developer_experience.md",
+            "chapters/09_enterprise_adoption.md",
+            "chapters/10_case_studies.md",
+            "chapters/11_regional_variations.md",
+            "chapters/12_emerging_patterns.md",
+            "chapters/13_investment_opportunities.md",
+            "chapters/14_roadmap_2030.md",
+            "chapters/15_building_agents.md",
+            "chapters/16_best_practices.md",
+            "chapters/17_troubleshooting.md",
+            "appendices/a_glossary.md",
+            "appendices/b_resources.md",
+            "appendices/c_code_examples.md",
+            "references/bibliography.md"
+        ]
+        for chapter in chapters:
+            if not os.path.exists(chapter):
+                os.makedirs(os.path.dirname(chapter), exist_ok=True)
+                with open(chapter, 'w') as f:
+                    title = os.path.basename(chapter).replace('.md', '').replace('_', ' ').title()
+                    f.write(f"# {title}\n\n")
+                    f.write("```{note}\n")
+                    f.write("This chapter is under development.\n")
+                    f.write("```\n\n")
+                    f.write("## Coming Soon\n\n")
+                    f.write("This section will be updated with detailed content.\n")
+        EOF
+    
+    - name: Build the book
+      run: |
+        jupyter-book build .
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./_build/html
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
